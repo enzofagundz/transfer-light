@@ -85,7 +85,7 @@ Este projeto utiliza **Laravel Sail** para simplificar a execução em Docker.
 
 ## 🏗️ Decisões de Arquitetura
 
-- **Separação de responsabilidades**: uso de Repository/Service para manter lógica de domínio isolada dos controladores.
-- **Enums tipados**: substituem constantes mágicas e melhoram a clareza. Armazenados como inteiros no banco para maior performance.
+- **Separação de responsabilidades**: uso de Repository/Service para manter a lógica de domínio isolada dos controllers, evitando acoplamento excessivo.
+- **Enums tipados**: usados no lugar de magic numbers e valores fixos dispersos no código, melhorando clareza e consistência. São persistidos como inteiros no banco, aproveitando melhor desempenho em consultas e índices.
 - **Eventos e Jobs**: notificação de recebimento será tratada de forma assíncrona, para evitar travar o fluxo principal em caso de falhas externas.
 - **Cache seletivo**: aplicado em pontos de leitura não críticos (ex: busca de usuários), mas **não** para valores mutáveis como saldo, para evitar inconsistências.
