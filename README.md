@@ -24,6 +24,24 @@ O sistema permite que usuários comuns e lojistas realizem transferências de di
 
 ---
 
+## Detalhes sobre a stack
+
+### PHPStan + Larastan
+
+Este projeto utiliza [Larastan](https://github.com/larastan/larastan), um plugin do PHPStan específico para Laravel, que adiciona regras de análise para:
+
+- Models Eloquent
+- Facades
+- Helpers do framework
+
+Isso aumenta a precisão da análise estática, detectando problemas que o PHPStan puro não conseguiria.
+
+- **Nível configurado**: 5  
+Escolhido por equilibrar profundidade de análise e viabilidade no contexto do teste técnico.  
+- **Pastas analisadas**: `app/` e `tests/`.  
+
+---
+
 ## 🚀 Setup do Projeto
 
 Este projeto utiliza **Laravel Sail** para simplificar a execução em Docker.
