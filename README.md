@@ -26,13 +26,13 @@ O sistema permite que usuários comuns e lojistas realizem transferências de di
 
 ## 🔍 Qualidade de Código
 
-Foram adicionadas ferramentas para manter consistência e padrões no projeto:
+Este projeto utiliza ferramentas para garantir consistência e detectar problemas cedo:
 
-- **Laravel Pint**: padronização de estilo de código conforme PSRs.
-- **PHPStan** (nível 5): análise estática para detectar erros potenciais antes da execução.
-- **Rector**: automatização de refatorações e aplicação de boas práticas modernas de PHP.
+- **Laravel Pint** → padronização de estilo de acordo com PSRs.  
+- **PHPStan + Larastan** (nível 5) → análise estática que compreende Eloquent, facades e helpers do Laravel. Equilibra profundidade e viabilidade para o contexto deste teste.  
+- **Rector** → automatiza refatorações e garante uso de boas práticas modernas de PHP.  
 
-> Escolhi usar estas ferramentas para mostrar preocupação com manutenção e clareza a longo prazo, além de facilitar evolução futura do projeto.
+> Essas ferramentas foram escolhidas para reduzir riscos de regressões, manter legibilidade e facilitar evolução futura.
 
 ---
 
@@ -60,32 +60,38 @@ Este projeto utiliza **Laravel Sail** para simplificar a execução em Docker.
 
 ### Como rodar
 
-1. Clone o repositório
+1; Clone o repositório
 
 ```bash
    git clone git@github.com:SEU_USUARIO/transfer-light.git
    cd transfer-light
 ```
 
-2. Suba os containers
+2; Suba os containers
 
 ```bash
 ./vendor/bin/sail up -d
 ```
 
-3. Rode as migrations
+3; Rode as migrations
 
 ```bash
 ./vendor/bin/sail artisan migrate
 ```
 
-4. Acesse em `http://localhost`
+4; Acesse em `http://localhost`
+
+5; Popule dados de exemplo (usuários, carteiras, saldos)
+
+```bash
+./vendor/bin/sail artisan db:seed
+```
 
 ---
 
 ## 🏗️ Decisões de Arquitetura
 
-- **Separação de responsabilidades**: uso de Repository/Service para manter a lógica de domínio isolada dos controllers, evitando acoplamento excessivo.
+- **Separação de responsabilidades**: uso de Repository/Service para manter a lógica de domínio isolada dos controllers. Isso facilita testes unitários e evita que regras de negócio fiquem espalhadas em camadas de apresentação.
 - **Enums tipados**: usados no lugar de magic numbers e valores fixos dispersos no código, melhorando clareza e consistência. São persistidos como inteiros no banco, aproveitando melhor desempenho em consultas e índices.
 - **Eventos e Jobs**: notificação de recebimento será tratada de forma assíncrona, para evitar travar o fluxo principal em caso de falhas externas.
 - **Cache seletivo**: aplicado em pontos de leitura não críticos (ex: busca de usuários), mas **não** para valores mutáveis como saldo, para evitar inconsistências.
@@ -95,6 +101,9 @@ Este projeto utiliza **Laravel Sail** para simplificar a execução em Docker.
 ## 🧪 Testes
 
 O projeto utiliza **Pest** como framework de testes.
+
+- **Testes unitários** → garantir a lógica de transferência (ex: saldo insuficiente, lojista não pode enviar).  
+- **Testes de integração** → validar o fluxo completo de uma transferência via Livewire.  
 
 ### Como rodar os testes
 
