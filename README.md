@@ -114,3 +114,38 @@ O projeto utiliza **Pest** como framework de testes.
 
 ./vendor/bin/sail artisan test
 ```
+
+---
+
+## 🌱 Fluxo de Git
+
+Adotei um fluxo baseado em **Git Flow simplificado** para manter o histórico organizado:
+
+- `main` → branch estável, usada apenas para entregas finais.
+- `develop` → branch de integração, onde os PRs de features são revisados antes do merge final.
+- `feature/*` → branches criadas para cada entrega incremental (ex: `feature/modelagem`, `feature/transfer-service`).
+
+Essa escolha facilita colaboração, evita commits diretos na `main` e simula um ambiente real de equipe.
+
+---
+
+## 🗂️ Modelagem de Dados
+
+A modelagem foi pensada para refletir as regras de negócio do desafio:
+
+- **Users** → armazena usuários comuns e lojistas, diferenciados por enum `UserType`.  
+- **Wallets** → armazena saldo de cada usuário de forma isolada.  
+- **Transactions** → registra transferências entre usuários, com enum `TransactionStatus` para representar o estado.  
+
+### Estrutura Simplificada
+
+- `users (id, name, cpf_cnpj, email, password, type)`  
+- `wallets (id, user_id, balance)`  
+- `transactions (id, sender_id, receiver_id, amount, status)`  
+
+### Regras
+
+- `cpf_cnpj` e `email` são únicos no sistema.  
+- `wallets.user_id` é único (1–1).  
+- Saldo precisa ser validado em toda operação.  
+- Transações são atômicas (se algo falhar, rollback).
