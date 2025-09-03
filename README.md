@@ -24,7 +24,19 @@ O sistema permite que usuários comuns e lojistas realizem transferências de di
 
 ---
 
-## Detalhes sobre a stack
+## 🔍 Qualidade de Código
+
+Foram adicionadas ferramentas para manter consistência e padrões no projeto:
+
+- **Laravel Pint**: padronização de estilo de código conforme PSRs.
+- **PHPStan** (nível 5): análise estática para detectar erros potenciais antes da execução.
+- **Rector**: automatização de refatorações e aplicação de boas práticas modernas de PHP.
+
+> Escolhi usar estas ferramentas para mostrar preocupação com manutenção e clareza a longo prazo, além de facilitar evolução futura do projeto.
+
+---
+
+## Detalhes sobre a stack voltada para qualidade de código
 
 ### PHPStan + Larastan
 
