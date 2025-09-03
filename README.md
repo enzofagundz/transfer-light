@@ -15,7 +15,7 @@ O sistema permite que usuários comuns e lojistas realizem transferências de di
 
 ## 🛠️ Stack
 
-- **Laravel** 11.x
+- **Laravel** 12.x
 - **Laravel Sail** (Docker)
 - **Livewire** + **AlpineJS**
 - **TailwindCSS** + **DaisyUI**
@@ -52,3 +52,10 @@ Este projeto utiliza **Laravel Sail** para simplificar a execução em Docker.
 4. Acesse em `http://localhost`
 
 ---
+
+## 🏗️ Decisões de Arquitetura
+
+- **Separação de responsabilidades**: uso de Repository/Service para manter lógica de domínio isolada dos controladores.
+- **Enums tipados**: substituem constantes mágicas e melhoram a clareza. Armazenados como inteiros no banco para maior performance.
+- **Eventos e Jobs**: notificação de recebimento será tratada de forma assíncrona, para evitar travar o fluxo principal em caso de falhas externas.
+- **Cache seletivo**: aplicado em pontos de leitura não críticos (ex: busca de usuários), mas **não** para valores mutáveis como saldo, para evitar inconsistências.
