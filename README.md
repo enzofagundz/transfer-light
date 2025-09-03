@@ -89,3 +89,19 @@ Este projeto utiliza **Laravel Sail** para simplificar a execução em Docker.
 - **Enums tipados**: usados no lugar de magic numbers e valores fixos dispersos no código, melhorando clareza e consistência. São persistidos como inteiros no banco, aproveitando melhor desempenho em consultas e índices.
 - **Eventos e Jobs**: notificação de recebimento será tratada de forma assíncrona, para evitar travar o fluxo principal em caso de falhas externas.
 - **Cache seletivo**: aplicado em pontos de leitura não críticos (ex: busca de usuários), mas **não** para valores mutáveis como saldo, para evitar inconsistências.
+
+---
+
+## 🧪 Testes
+
+O projeto utiliza **Pest** como framework de testes.
+
+### Como rodar os testes
+
+```bash
+./vendor/bin/sail test
+
+# or
+
+./vendor/bin/sail artisan test
+```
