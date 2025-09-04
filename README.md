@@ -103,7 +103,7 @@ Este projeto utiliza **Laravel Sail** para simplificar a execução em Docker.
 O projeto utiliza **Pest** como framework de testes.
 
 - **Testes unitários** → garantir a lógica de transferência (ex: saldo insuficiente, lojista não pode enviar).  
-- **Testes de integração** → validar o fluxo completo de uma transferência via Livewire.  
+- **Testes de integração** → validar o fluxo completo de uma transferência via Livewire.
 
 ### Como rodar os testes
 
@@ -114,6 +114,17 @@ O projeto utiliza **Pest** como framework de testes.
 
 ./vendor/bin/sail artisan test
 ```
+
+## 🧪 Estratégia de Testes
+
+Não implementei testes unitários para as classes genéricas (`BaseRepository`, `BaseService`), porque elas são simples delegadores ao Eloquent, já testados pelo próprio framework.
+
+Foquei em testes para as **regras de negócio críticas**:
+
+- Fluxo de transferência (`TransferService`).
+- Respeito às regras de saldo.
+- Comportamento em caso de falha no autorizador externo.
+- Garantia de rollback em caso de inconsistência.
 
 ---
 
