@@ -14,12 +14,12 @@ abstract class Service implements BaseService
         $this->repository = $repository;
     }
 
-    public function list()
+    public function all()
     {
         return $this->repository->all();
     }
 
-    public function get($id)
+    public function get(int|string $id)
     {
         return $this->repository->find($id);
     }
@@ -29,12 +29,12 @@ abstract class Service implements BaseService
         return $this->repository->create($data);
     }
 
-    public function update($id, array $data)
+    public function update(int|string $id, array $data)
     {
         return $this->repository->update($id, $data);
     }
 
-    public function destroy($id)
+    public function destroy(int|string $id)
     {
         return $this->repository->delete($id);
     }
