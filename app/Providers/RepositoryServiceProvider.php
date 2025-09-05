@@ -9,7 +9,18 @@ class RepositoryServiceProvider extends ServiceProvider
     /**
      * Register services.
      */
-    public function register(): void {}
+    public function register(): void
+    {
+        $this->app->bind(
+            \App\Repositories\Interfaces\TransactionRepositoryInterface::class,
+            \App\Repositories\TransactionRepository::class
+        );
+
+        $this->app->bind(
+            \App\Repositories\Interfaces\UserRepositoryInterface::class,
+            \App\Repositories\UserRepository::class
+        );
+    }
 
     /**
      * Bootstrap services.
