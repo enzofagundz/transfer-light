@@ -5,10 +5,19 @@ namespace App\Repositories;
 use App\Repositories\Interfaces\BaseRepository;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @template T of \Illuminate\Database\Eloquent\Model
+ */
 abstract class Repository implements BaseRepository
 {
+    /**
+     * @var T
+     */
     protected Model $model;
 
+    /**
+     * @param  T  $model
+     */
     public function __construct(Model $model)
     {
         $this->model = $model;
