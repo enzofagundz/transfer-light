@@ -10,7 +10,7 @@ test('Returns true when service responds with authorized message', function () {
     ]);
 
     $service = new AuthorizeService;
-    expect($service->checkAuthorization())->toBeTrue();
+    expect($service->authorize())->toBeTrue();
 });
 
 test('Throws ExternalServiceException on connection failure', function () {
@@ -19,5 +19,5 @@ test('Throws ExternalServiceException on connection failure', function () {
     ]);
 
     $service = new AuthorizeService;
-    expect(fn () => $service->checkAuthorization())->toThrow(ExternalServiceException::class);
+    expect(fn () => $service->authorize())->toThrow(ExternalServiceException::class);
 });

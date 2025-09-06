@@ -30,7 +30,7 @@ class AuthorizeService implements AuthorizeServiceInterface
      */
     protected const int RETRY_DELAY = 100;
 
-    public function checkAuthorization(): bool
+    public function authorize(): bool
     {
         try {
             $response = Http::timeout(self::TIMEOUT)

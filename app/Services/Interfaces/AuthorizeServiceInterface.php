@@ -4,5 +4,5 @@ namespace App\Services\Interfaces;
 
 interface AuthorizeServiceInterface
 {
-    public function checkAuthorization(): bool;
+    public function authorize(): bool;
 }
