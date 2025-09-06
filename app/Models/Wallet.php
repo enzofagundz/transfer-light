@@ -24,4 +24,9 @@ class Wallet extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function canTransfer(float $amount): bool
+    {
+        return $this->balance >= $amount;
+    }
 }
