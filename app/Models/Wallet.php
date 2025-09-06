@@ -16,8 +16,17 @@ class Wallet extends Model
         'balance',
     ];
 
+    protected $casts = [
+        'balance' => 'decimal:2',
+    ];
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function canTransfer(float $amount): bool
+    {
+        return $this->balance >= $amount;
     }
 }
