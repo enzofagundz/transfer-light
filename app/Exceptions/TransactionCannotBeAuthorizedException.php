@@ -2,9 +2,7 @@
 
 namespace App\Exceptions;
 
-use Exception;
-
-class TransactionCannotBeAuthorizedException extends Exception
+class TransactionCannotBeAuthorizedException extends DomainException
 {
-    //
+    protected $message = 'The transaction was not authorized by the external service.';
 }

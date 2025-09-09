@@ -6,7 +6,6 @@ use App\Exceptions\ExternalServiceException;
 use App\Services\Interfaces\AuthorizeServiceInterface;
 use Http;
 use Illuminate\Http\Client\ConnectionException;
-use Str;
 
 class AuthorizeService implements AuthorizeServiceInterface
 {
@@ -38,6 +37,7 @@ class AuthorizeService implements AuthorizeServiceInterface
                 ->get(self::AUTHORIZE_URL);
 
             return $response->successful() && $this->isAuthorized($response->json());
+
         } catch (ConnectionException $e) {
             throw new ExternalServiceException('Failed to connect to the external authorization service.', 0, $e);
         } catch (\Exception $e) {
@@ -47,6 +47,9 @@ class AuthorizeService implements AuthorizeServiceInterface
 
     protected function isAuthorized(?array $response): bool
     {
-        return filled($response['message']) && Str::lower($response['message']) === 'authorized';
+        return isset($response['status']) &&
+            $response['status'] === 'success' &&
+            isset($response['data']['authorization']) &&
+            $response['data']['authorization'] === true;
     }
 }

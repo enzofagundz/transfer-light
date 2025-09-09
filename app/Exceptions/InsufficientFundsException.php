@@ -2,9 +2,7 @@
 
 namespace App\Exceptions;
 
-use Exception;
-
-class InsufficientFundsException extends Exception
+class InsufficientFundsException extends DomainException
 {
-    //
+    protected $message = 'The sender does not have sufficient funds for this transfer.';
 }

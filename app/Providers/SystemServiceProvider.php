@@ -30,6 +30,11 @@ class SystemServiceProvider extends ServiceProvider
             \App\Services\Interfaces\TransferServiceInterface::class,
             \App\Services\TransferService::class
         );
+
+        $this->app->bind(
+            \App\Services\Interfaces\NotificationServiceInterface::class,
+            \App\Services\NotificationService::class
+        );
     }
 
     /**
