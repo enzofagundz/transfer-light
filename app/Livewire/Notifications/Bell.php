@@ -8,7 +8,7 @@ use Livewire\Component;
 
 class Bell extends Component
 {
-    public $unreadNotificationsCount = 0;
+    public int $unreadNotificationsCount = 0;
 
     public function mount(NotificationServiceInterface $notificationService): void
     {
