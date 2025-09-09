@@ -13,6 +13,7 @@ use Illuminate\Notifications\Notifiable;
  * @property int $id
  * @property Wallet|null $wallet
  * @property UserType $type
+ * @property string $name
  */
 class User extends Authenticatable
 {
@@ -64,5 +65,15 @@ class User extends Authenticatable
     public function transactions(): HasMany
     {
         return $this->hasMany(Transaction::class);
+    }
+
+    public function notifications(): HasMany
+    {
+        return $this->hasMany(Notification::class);
+    }
+
+    public function unreadNotifications(): HasMany
+    {
+        return $this->notifications()->whereNull('read_at');
     }
 }
