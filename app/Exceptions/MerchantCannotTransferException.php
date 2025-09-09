@@ -2,9 +2,7 @@
 
 namespace App\Exceptions;
 
-use Exception;
-
-class MerchantCannotTransferException extends Exception
+class MerchantCannotTransferException extends DomainException
 {
-    //
+    protected $message = 'Merchants are not allowed to send money, only receive.';
 }
