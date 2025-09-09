@@ -6,8 +6,6 @@ use App\Models\User;
 use App\Repositories\Interfaces\UserRepositoryInterface;
 use App\Services\Interfaces\UserServiceInterface;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
 
 class UserService extends Service implements UserServiceInterface
 {

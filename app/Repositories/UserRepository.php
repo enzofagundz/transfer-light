@@ -6,6 +6,7 @@ use App\Enums\UserType;
 use App\Models\User;
 use App\Repositories\Interfaces\UserRepositoryInterface;
 use DB;
+use Hash;
 use Illuminate\Support\Collection;
 
 /**
@@ -39,7 +40,7 @@ class UserRepository extends Repository implements UserRepositoryInterface
             $user = $this->create([
                 'name' => $data['name'],
                 'email' => $data['email'],
-                'password' => \Illuminate\Support\Facades\Hash::make($data['password']),
+                'password' => Hash::make($data['password']),
                 'cpf_cnpj' => $data['cpf_cnpj'],
                 'type' => $data['type'],
             ]);

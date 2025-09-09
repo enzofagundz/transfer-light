@@ -178,16 +178,16 @@ Optei por centralizar todas as funcionalidades principais em um único **Dashboa
 
 A interface foi dividida em componentes Livewire coesos e reutilizáveis, cada um com sua responsabilidade:
 
--   `Pages\Dashboard`: Orquestra a página principal e o sistema de abas.
--   `Users\Table` e `Users\CreateForm`: Componentes para listar e criar usuários. A tabela se atualiza em tempo real após a exclusão de um usuário, manipulando a coleção em memória para uma experiência instantânea e sem queries desnecessárias ao banco.
--   `Transfers\CreateForm`: Formulário de transferência que valida o saldo do remetente em tempo real.
--   `Notifications\Bell`: Um componente de notificação global que utiliza `wire:poll` para buscar novas transações de forma assíncrona, informando o usuário sobre atividades recentes no sistema.
--   `Shared\AlertManager`: Um sistema de alertas global e event-driven, capaz de exibir mensagens de sucesso e erro de forma consistente, mesmo após redirecionamentos.
+- `Pages\Dashboard`: Orquestra a página principal e o sistema de abas.
+- `Users\Table` e `Users\CreateForm`: Componentes para listar e criar usuários. A tabela se atualiza em tempo real após a exclusão de um usuário, manipulando a coleção em memória para uma experiência instantânea e sem queries desnecessárias ao banco.
+- `Transfers\CreateForm`: Formulário de transferência que valida o saldo do remetente em tempo real.
+- `Notifications\Bell`: Um componente de notificação global que utiliza `wire:poll` para buscar novas transações de forma assíncrona, informando o usuário sobre atividades recentes no sistema.
+- `Shared\AlertManager`: Um sistema de alertas global e event-driven, capaz de exibir mensagens de sucesso e erro de forma consistente, mesmo após redirecionamentos.
 
 ### Reatividade e UX
 
--   **Navegação Rápida:** O atributo `wire:navigate` é usado nos links para fornecer uma navegação quase instantânea entre as seções, carregando apenas o conteúdo necessário.
--   **Feedback Instantâneo:** Ações como exclusão de usuários, validação de formulários e alertas de erro acontecem em tempo real, sem a necessidade de um refresh completo da página.
--   **Controle de Estado com AlpineJS:** O estado de componentes de UI, como dropdowns e abas, é gerenciado pelo AlpineJS, garantindo uma interação fluida e confiável, e deixando o Livewire focado na comunicação com o servidor.
+- **Navegação Rápida:** O atributo `wire:navigate` é usado nos links para fornecer uma navegação quase instantânea entre as seções, carregando apenas o conteúdo necessário.
+- **Feedback Instantâneo:** Ações como exclusão de usuários, validação de formulários e alertas de erro acontecem em tempo real, sem a necessidade de um refresh completo da página.
+- **Controle de Estado com AlpineJS:** O estado de componentes de UI, como dropdowns e abas, é gerenciado pelo AlpineJS, garantindo uma interação fluida e confiável, e deixando o Livewire focado na comunicação com o servidor.
 
 Essa abordagem resulta em uma interface que é ao mesmo tempo poderosa e leve, oferecendo uma experiência de usuário moderna e agradável.

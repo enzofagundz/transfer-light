@@ -4,7 +4,6 @@ namespace App\Livewire\Transfers;
 
 use App\Livewire\Forms\CreateTransfer;
 use App\Livewire\Pages\Dashboard;
-use App\Models\User;
 use App\Services\Interfaces\UserServiceInterface;
 use Illuminate\Support\Collection;
 use Illuminate\View\View;
@@ -32,6 +31,7 @@ class CreateForm extends Component
     {
         if ($this->form->senderId) {
             $userService = resolve(UserServiceInterface::class);
+
             return $userService->getUserBalance($this->form->senderId);
         }
 
