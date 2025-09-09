@@ -15,9 +15,7 @@ class SendTransactionNotificationJob implements ShouldQueue
     /**
      * Create a new job instance.
      */
-    public function __construct(public Transaction $transaction)
-    {
-    }
+    public function __construct(public Transaction $transaction) {}
 
     /**
      * Execute the job.
@@ -31,11 +29,16 @@ class SendTransactionNotificationJob implements ShouldQueue
             ]);
 
             if (! $response->successful()) {
-                throw new \RuntimeException('Notification service failed: ' . $response->status());
+                throw new \RuntimeException('Notification service failed: '.$response->status());
             }
 
         }, function (\Throwable $e) {
-            Log::error("Error sending transaction notification for transaction {$this->transaction->id}: " . $e->getMessage());
+            Log::error("Error sending transaction notification for transaction {$this->transaction->id}: ".$e->getMessage());
         });
+    }
+
+    public function failed(\Throwable $exception): void
+    {
+        Log::critical("Permanent failure sending transaction notification for transaction {$this->transaction->id}: ".$exception->getMessage());
     }
 }
