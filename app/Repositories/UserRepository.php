@@ -21,7 +21,9 @@ class UserRepository extends Repository implements UserRepositoryInterface
 
     public function findWithWallet(int $id): ?User
     {
-        return $this->model->with('wallet')->find($id);
+        return $this->model->with([
+            'wallet' => fn ($query) => $query->lockForUpdate(),
+        ])->find($id);
     }
 
     public function updateBalance(User $user, float $newBalance): bool

@@ -22,7 +22,7 @@ class PostUser extends Form
     #[Validate(['required', 'min:3', 'max:255', 'confirmed:password'])]
     public string $password_confirmation = '';
 
-    #[Validate(['required', 'min:3', 'max:255', 'unique:users,cpf_cnpj'])]
+    #[Validate(['required', 'min:3', 'max:255', 'unique:users,cpf_cnpj', 'cpf_ou_cnpj'])]
     public string $cpf_cnpj = '';
 
     #[Validate(['required'])]
