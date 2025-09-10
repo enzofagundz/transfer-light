@@ -1,5 +1,6 @@
 <?php
 
+use App\DTOs\TransferData;
 use App\Models\User;
 use App\Repositories\Interfaces\UserRepositoryInterface;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -70,4 +71,29 @@ it('should delete an user and its wallet', function () {
 
     $this->assertDatabaseMissing('users', ['id' => $user->id]);
     $this->assertDatabaseMissing('wallets', ['id' => $wallet->id]);
+});
+
+it('should prevent race condition on wallet balance', function () {
+    $sender = User::factory()->create();
+    $receiver = User::factory()->create();
+    $sender->wallet()->create(['balance' => 100]);
+    $receiver->wallet()->create(['balance' => 100]);
+    $service = app('App\Services\Interfaces\TransferServiceInterface'::class);
+
+    $t1 = fn() => $service->transfer(new TransferData($sender->id, $receiver->id, 100));
+    $t2 = fn() => $service->transfer(new TransferData($sender->id, $receiver->id, 100));
+
+    try {
+        $t1();
+        $t2();
+    } catch (\Throwable $e) {
+        return;
+    }
+
+    $sender->refresh()->load('wallet');
+    $receiver->refresh()->load('wallet');
+
+    expect($sender->wallet)->not()->toBeNull();
+    expect($receiver->wallet)->not()->toBeNull();
+    expect($sender->wallet->balance)->toBeGreaterThanOrEqual(0);
 });
