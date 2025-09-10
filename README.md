@@ -191,3 +191,14 @@ A interface foi dividida em componentes Livewire coesos e reutilizáveis, cada u
 - **Controle de Estado com AlpineJS:** O estado de componentes de UI, como dropdowns e abas, é gerenciado pelo AlpineJS, garantindo uma interação fluida e confiável, e deixando o Livewire focado na comunicação com o servidor.
 
 Essa abordagem resulta em uma interface que é ao mesmo tempo poderosa e leve, oferecendo uma experiência de usuário moderna e agradável.
+
+---
+
+## 🚀 Deploy
+
+O projeto está publicado em produção no Laravel Cloud, utilizando integração contínua com o repositório GitHub.
+A escolha do Laravel Cloud foi motivada pela simplicidade e pelo foco no que realmente importa neste teste: regras de negócio e qualidade de código.
+
+- Banco de dados: PostgreSQL gerenciado pelo Laravel Cloud.
+- Infraestrutura: HTTPS automático, logs e métricas integrados.
+- CI/CD: cada push na branch principal dispara build e deploy automáticos.
